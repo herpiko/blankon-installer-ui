@@ -3,41 +3,43 @@ angular.module("install",[])
     "$scope", "$window", "$rootScope","$timeout","$interval", 
     function ($scope, $window, $rootScope, $timeout, $interval){
   console.log(JSON.stringify($rootScope.installationData));
-
-    var params = "";
-    params += "&partition=" + installationData.partition;
-    params += "&device=" + installationData.device;
-    params += "&hostname=" + installationData.hostname;
-    params += "&username=" + installationData.username;
-    params += "&fullname=" + installationData.fullname;
-    params += "&password=" + installationData.password;
-    params += "&language=" + installationData.language;
-    params += "&timezone=" + installationData.timezone;
-    params += "&keyboard=" + installationData.keyboard;
-    params += "&autologin=" + installationData.autologin;
-    installation = new Installation(params);
-    installation.start();
-    $scope.currentStep = "";
-    updateStatus();
-    statusUpdater = $interval(updateStatus, 5000);
-
+    var showError = function(){
+      $scope.errorLog = "Error!";
+    }
     var updateStatus = function(){
       var status = installation.getStatus();
       console.log(status.status + ":" + status.description);
       $scope.currentStep = status.description;
       $scope.progressBarWidth = status.progress;
       if (status.status > 1) {
+        console.log("stopped");
         $interval.cancel(statusUpdater);
         if (status.status == 2) {
+          console.log("error");
           showError();
         } else {
+          console.log("installation finished");
           $rootScope.next();
         }
       }
     }
-    var showError = function(){
-      $scope.errorLog = "Error!";
-    }
+
+    var params = "";
+    params += "&partition=" + $rootScope.installationData.partition;
+    params += "&device=" + $rootScope.installationData.device;
+    params += "&hostname=" + $rootScope.installationData.hostname;
+    params += "&username=" + $rootScope.installationData.username;
+    params += "&fullname=" + $rootScope.installationData.fullname;
+    params += "&password=" + $rootScope.installationData.password;
+    params += "&language=" + $rootScope.installationData.language;
+    params += "&timezone=" + $rootScope.installationData.timezone;
+    params += "&keyboard=" + $rootScope.installationData.keyboard;
+    params += "&autologin=" + false;
+    installation = new Installation(params);
+    installation.start();
+    $scope.currentStep = "";
+    statusUpdater = $interval(updateStatus, 1000);
+
 
 
 }])
