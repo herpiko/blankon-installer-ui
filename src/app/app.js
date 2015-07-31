@@ -2,7 +2,7 @@
 angular.module('Biui', [
   "ui.router", 
   "ngAnimate",
-  "ngSlider",
+  "angularAwesomeSlider",
   "html",
   "mm.foundation",
   "hello",
