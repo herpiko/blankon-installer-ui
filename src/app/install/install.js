@@ -39,6 +39,7 @@ angular.module("install",[])
     params += "&hostname=" + $rootScope.installationData.hostname;
     params += "&username=" + $rootScope.installationData.username;
     params += "&fullname=" + $rootScope.installationData.fullname;
+    params += "&passphrase=" + $rootScope.installationData.passphrase;
     params += "&password=" + $rootScope.installationData.password;
     params += "&language=" + $rootScope.installationData.language;
     params += "&timezone=" + $rootScope.installationData.timezone;

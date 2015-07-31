@@ -63,7 +63,7 @@ angular.module("user",[])
   });
   $scope.validatePersonalization = function(installationData, validPassword, isSamePassword) {
     $rootScope.personalizationError = false;
-    if (installationData.hostname && installationData.username && installationData.fullname && isSamePassword) {
+    if (installationData.hostname && installationData.username && installationData.fullname && isSamePassword && installationData.passphrase) {
       if ($scope.enforceStrongPassword) {
         if (validPassword) {
           $rootScope.next();
