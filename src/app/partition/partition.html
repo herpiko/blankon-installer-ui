@@ -9,7 +9,7 @@
       </li>
     </ul>
     <div ng-hide="advancedPartition" class="fade">
-      <p ng-show="selectedDrive" class="fade">Please choose the partition on device below which you would like to install BlankOn into or use advanced partitioning tool for more control.<br>
+      <!--p ng-show="selectedDrive" class="fade">Please choose the partition on device below which you would like to install BlankOn into or use advanced partitioning tool for more control.<br>
       </p>
       <div class="top-bar-partition" style="width:{{selectedDrive.driveWidth}}px" ng-show="selectedDrive" class="fade">
         <span class="legend-partition-normal">Used</span>
@@ -28,17 +28,17 @@
           <div style="width:{{partition.blockWidth}}px;">
           </div>
         </a>
-      </div>
+      </div-->
       <div ng-show="validInstallationTarget">
         <br>
         <p>
-        You are choosing {{selectedInstallationTarget}} to be installed with BlankOn.<br>
+        You are choosing {{selectedDrive.path}} - {{selectedDrive.model}} to be installed with BlankOn.<br>
         <strong>WARNING : </strong>
-      The selected partition will be wiped out. Swap partition will be created if you don't have one.
+        The selected drive will be wiped out. The installer will recreate your partition with the encrypted one.
       </p>
       </div>
     </div>
-    <div ng-show="advancedPartition && !actionDialog" class="fade">
+    <!--div ng-show="advancedPartition && !actionDialog" class="fade">
       <div class="top-bar-partition" style="width:{{selectedDrive.driveWidth}}px">
         <span ng-show="selectedDrive" class="legend-partition-primary">Primary</span>
         <span ng-show="selectedDrive" class="legend-partition-logical">Logical</span>
@@ -78,8 +78,6 @@
                 <td>Mount Point</td>
                 <td>Size</td>
                 <td width="100"></td>
-                <!--td>Used</td>
-                <td>Unused</td-->
               </tr>
               <tr ng-repeat="partition in selectedDrive.partitionList" ng-hide="partition.hidden" ng-class="{highlight:partition.highlighted}" ng-mouseover="highlight(partition)" ng-mouseleave="unhighlight(partition)">
                 <td class="td-partition">
@@ -122,8 +120,8 @@
                 </td>
               </tr>
       </table>
-    </div>
-    <div ng-show="formatDialog" class="fade">
+    </div-->
+    <!--div ng-show="formatDialog" class="fade">
       <h2>Format Partition</h2>
       <p>{{formatDialogSelected.sizeGbOrigin}} GB size ({{formatDialogSelected.start}} - {{formatDialogSelected.end}})</p>
       <div class="partoedi-action-dialog-form">
@@ -199,7 +197,7 @@
         <button class='button' ng-click="partitionCreateApply(createDialogSelected)">Apply</button>
       </div>
 
-    </div>
+    </div-->
   </div>
   <div class="columns nav-button" ng-show="devices[0] && !actionDialog && !advancedPartition">
     <button class='button' ng-click="previous()">Previous</button>
