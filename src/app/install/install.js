@@ -40,6 +40,7 @@ angular.module("install",[])
     params += "&username=" + $rootScope.installationData.username;
     params += "&fullname=" + $rootScope.installationData.fullname;
     params += "&passphrase=" + $rootScope.installationData.passphrase;
+    params += "&bluetooth=" + $rootScope.installationData.bluetooth;
     params += "&password=" + $rootScope.installationData.password;
     params += "&language=" + $rootScope.installationData.language;
     params += "&timezone=" + $rootScope.installationData.timezone;

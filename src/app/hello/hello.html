@@ -2,8 +2,18 @@
   <div class="columns content">
     <h1>Hello</h1>
     <p>
-    Welcome to BlankOn installation program. 
+    Welcome to BlankOn installation program. This installation requires a bluetooth device that installed with secprompt apps. You would use it to unlock the encryption in the future.
     </p>
+    <button ng-hide="scanning" ng-click="btScan()">Scan bluetooth device</button>
+    <span ng-show="scanning">Scanning nearby bluetooth device ...</span>
+    <div ng-show="scannedList[0]">
+      <p>Please select your bluetooth device :</p>
+      <span ng-repeat="item in scannedList">
+        <button style="margin:5px !important" ng-click="setBluetooth(item.addr)">{{item.hostname}}</button>
+        <br>
+      </span>
+    </div>
+    <p ng-show="notDetect">No bluetooth device detected</p>
     <!-- Please choose your language and region below to continue. If your choice is not on the list, you can choose the default values and set again later after the system is fully installed in the Settings application.
     </p>
     <p><a class="button dropdown" dropdown-toggle="#language-selection"><span ng-hide="selectedLang">Change language</span><span>{{selectedLang}}</span></a><p>
@@ -15,6 +25,6 @@
   </div>
   <div class="columns nav-button">
     <button class='button' ng-click="exit()">Continue using Live CD</button>
-    <button class='button' ng-click="next()">Install BlankOn</button>
+    <!--button class='button' ng-click="next()">Install BlankOn</button-->
   </div>
 </div>
