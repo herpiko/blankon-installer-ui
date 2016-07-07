@@ -3,6 +3,8 @@ angular.module("partition",[])
   function ($scope, $window, $timeout, $rootScope){
     
     $(".content").css("height", $rootScope.contentHeight);
+
+
    
     $scope.slider = {
     	start : 0,
@@ -232,7 +234,19 @@ angular.module("partition",[])
       $scope.exitAdvancedModeMessage = false;
       $scope.applyAdvancedModeMessage = false;
     }
+
+    $scope.unselectEfiPartition = function() {
+      $rootScope.selectedEfiPartition = false;
+      $rootScope.validInstallationTarget = false;
+    }
     $scope.selectInstallationTarget = function(partition) {
+      
+      // TODO :Is EFI partition selection?
+      /* if ($rootScope.isEfi && !$rootScope.isEfiReady && !$rootScope.selectedEfiPartition) { */
+      /*   $rootScope.selectedEfiPartition = $rootScope.selectedDrive.path + partition.id; */ 
+      /*   return; */
+      /* } */
+      
       console.log(partition)
       if (!partition.disallow) {
         $rootScope.installationData.partition = $rootScope.selectedDrive.partitionList.indexOf(partition);
@@ -874,6 +888,21 @@ angular.module("partition",[])
     }
     $scope.setDrive = function(drive) {
       // TODO : reset UI
+      $rootScope.isEfiReady = false;
+      $rootScope.selectedEfiPartition = false;
+      $rootScope.isEfi = parseInt(Installation.isEfi());
+      if ($rootScope.isEfi === 1) {
+        $rootScope.whichEfi = Installation.whichEfi();
+        $rootScope.efiPartition = $rootScope.whichEfi.split(",")[0];
+        $rootScope.efiNeedFormat = $rootScope.whichEfi.split(",")[1];
+        if ($rootScope.efiNeedFormat === "N") {
+          $rootScope.selectedEfiPartition = $rootScope.efiPartition;
+        }
+        if ($rootScope.efiPartition.indexOf(drive.path) > -1) {
+          $rootScope.isEfiReady = true;
+          $rootScope.selectedEfiPartition = $rootScope.efiPartition;
+        }
+      }
       $rootScope.installationData.device = $rootScope.devices.indexOf(drive);
       var path = drive.path;
       $rootScope.installationData.device_path = path;

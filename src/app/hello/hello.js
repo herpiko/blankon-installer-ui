@@ -19,4 +19,9 @@ angular.module("hello",[])
       }
     }
     $scope.setLanguage($scope.languages[0]);
+
+    // Leave this here for fast debugging
+    /* setTimeout(function(){ */
+    /*   $rootScope.next(); */
+    /* }, 1000) */
 }])

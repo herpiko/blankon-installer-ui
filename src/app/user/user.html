@@ -9,7 +9,7 @@
         <label class="right inline">{{'computer_name' | translate}}</label>
       </div>
       <div class="small-8 columns">
-        <input type="text" ng-model="installationData.hostname"/>
+        <input value="test" type="text" ng-model="installationData.hostname"/>
       </div>
     </div>
     <div class="row small-8">
@@ -17,7 +17,7 @@
         <label class="right inline">{{'full_name' | translate}}</label>
       </div>
       <div class="small-8 columns">
-        <input type="text" ng-model="installationData.fullname"/>
+        <input value="test" type="text" ng-model="installationData.fullname"/>
       </div>
     </div>
     <div class="row small-8">
@@ -25,7 +25,7 @@
         <label class="right inline">{{'username' | translate}}</label>
       </div>
       <div class="small-8 columns">
-        <input type="text" ng-model="installationData.username"/>
+        <input value="test" type="text" ng-model="installationData.username"/>
       </div>
     </div>
     <div class="row small-8">
@@ -33,7 +33,7 @@
         <label class="right inline">{{'password' | translate}}</label>
       </div>
       <div class="small-8 columns">
-              <input type="password" ng-model="installationData.password" placeholder="At least 8 characters"/>
+              <input value="test" type="password" ng-model="installationData.password"/>
               <div ng-show="enforceStrongPassword">
               <div style="margin-top:-16px;height:4px;background-color:red;width:33%" ng-show="passwordStrength == 'weak'"></div>
               <div style="margin-top:-16px;height:4px;background-color:yellow;width:66%" ng-show="passwordStrength == 'strong'"></div>
@@ -46,7 +46,7 @@
         <label class="right inline">{{'repeat_password' | translate}}</label>
       </div>
       <div class="small-8 columns">
-        <input type="password" ng-model="installationData.passwordRepeat" place-holder="Type the password again"/>
+        <input value="test" type="password" ng-model="installationData.passwordRepeat" place-holder="Type the password again"/>
               <div style="margin-top:-16px;height:4px;background-color:#438FB9;" ng-show="isSamePassword"></div>
               <div style="margin-top:-16px;height:4px;background-color:red;" ng-show="!isSamePassword && installationData.passwordRepeat[0]"></div>
       </div>

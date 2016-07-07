@@ -14,7 +14,7 @@ var en = {
   computer_name : "Computer Name",
   full_name : "Your Name",
   username : "Username",
-  password : "password",
+  password : "Password",
   repeat_password : "Repeat Password",
   automatically_login : "Automatically login",
   enforced_password : "Enforce strong password",

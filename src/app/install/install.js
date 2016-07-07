@@ -11,10 +11,22 @@ angular.module("install",[])
       console.log("error");
       $scope.error = true;
     }
+    var currentProgress;
     var updateStatus = function(){
       var status = $rootScope.installation.getStatus();
       console.log(status.status + ":" + status.description);
       $scope.currentStep = status.description;
+      $scope.progressBarWidth = status.progress;
+      if ($scope.currentStep === 'copying_filesystem') {
+        if (!currentProgress) {
+          currentProgress = 20;
+        }
+        if (currentProgress < 80) {
+          currentProgress += 0.5;
+        }
+        status.progress = currentProgress;
+        console.log(status.progress);
+      }
       $scope.progressBarWidth = status.progress;
       if (status.status > 1) {
         $interval.cancel(statusUpdater);
@@ -34,6 +46,7 @@ angular.module("install",[])
       }
     }, 500);
 
+
     var params = "";
     params += "&partition=" + $rootScope.installationData.partition;
     params += "&device=" + $rootScope.installationData.device;
@@ -49,6 +62,15 @@ angular.module("install",[])
     params += "&advancedMode=" + $rootScope.advancedPartition;
     if ($rootScope.advancedPartition) {
         params += "&steps=" + $rootScope.partitionSteps;
+    }
+    if ($rootScope.isEfi) {
+        params += "&isEfi=" + true;
+        params += "&efiPartition=" + $rootScope.selectedEfiPartition;
+        params += "&efiNeedFormat=" + $rootScope.efiNeedFormat;
+    }  else {
+        params += "&isEfi=" + "";
+        params += "&efiPartition=" + "";
+        params += "&efiNeedFormat=" + "";
     }
     // give time for view transition
     $timeout(function(){
