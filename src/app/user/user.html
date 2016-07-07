@@ -33,7 +33,7 @@
         <label class="right inline">{{'password' | translate}}</label>
       </div>
       <div class="small-8 columns">
-              <input type="password" ng-model="installationData.password" placeholder="At least 8 characters"/>
+              <input type="password" ng-model="installationData.password"/>
               <div ng-show="enforceStrongPassword">
               <div style="margin-top:-16px;height:4px;background-color:red;width:33%" ng-show="passwordStrength == 'weak'"></div>
               <div style="margin-top:-16px;height:4px;background-color:yellow;width:66%" ng-show="passwordStrength == 'strong'"></div>

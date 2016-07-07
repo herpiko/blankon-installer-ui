@@ -9,17 +9,23 @@
       </li>
     </ul>
     <div ng-hide="advancedPartition" class="fade">
-      <p ng-show="selectedDrive" class="fade">{{'please_choose_partition' | translate}}<br>
+      <p ng-show="selectedDrive && isEfi && isEfiReady" class="fade">Your system is in UEFI mode. {{efiPartition}} will be used as EFI partition.<br>
       </p>
+      <p ng-show="selectedDrive && ((!isEfi && !isEfiReady) || selectedEfiPartition)" class="fade">{{'please_choose_partition' | translate}}<br>
+      </p>
+      <p ng-show="selectedDrive && isEfi && !isEfiReady && !selectedEfiPartition" class="fade">Your system is in UEFI mode but there is no EFI partition in your selected drive. Please select a FAT32 partition to be used as EFI partition, otherwise, you could create one in PartoEdi/Advanced Mode.<br>
+      </p>
+      
       <div class="top-bar-partition" style="width:{{selectedDrive.driveWidth}}px" ng-show="selectedDrive" class="fade">
         <span class="legend-partition-normal">{{'used' | translate}}</span>
         <span class="legend-partition-disallow">{{'too_small' | translate}}</span>
         <span class="legend-partition-freespace">{{'free_space' | translate}}</span>
+        <span class="legend-partition-efi" ng-show="isEfi">EFI</span>
         <a class="button tiny right" ng-click="switchToAdvancedPartition()">{{'enter_advanced_mode' | translate}}</button>
 </div>
 
       <div class="drive-block fade" ng-show="selectedDrive" style="width:{{selectedDrive.driveWidth}}px !important;">
-        <a href="" ng-repeat="partition in selectedDrive.partitionList" ng-hide="partition.hidden" class="partition-block" ng-click="selectInstallationTarget(partition)" ng-class="{selected:partition.selected, disallow:partition.disallow, freespace:partition.freespace, normal:partition.normal, extended:partition.extended}">
+        <a href="" ng-repeat="partition in selectedDrive.partitionList" ng-hide="partition.hidden" class="partition-block" ng-click="selectInstallationTarget(partition)" ng-class="{selected:partition.selected, disallow:partition.disallow, freespace:partition.freespace, normal:partition.normal, extended:partition.extended, efi : selectedDrive.path + partition.id == selectedEfiPartition}">
           <span class="pop fade" style="color:white">
            Size : {{partition.sizeGb}} GB<br>
            File System : {{partition.filesystem || "-"}}<br>
@@ -31,8 +37,11 @@
           </div>
         </a>
       </div>
+      <br>
+      <p ng-show="selectedEfiPartition && !isEfiReady" class="fade">
+        You are choosing {{selectedEfiPartition}} to be installed with an EFI boot. You can <button style="padding:4px;" ng-click="unselectEfiPartition();">cancel</button> this selection.
+      </p>
       <div ng-show="validInstallationTarget">
-        <br>
         <p>
           {{'you_are_choosing' | translate}} {{selectedInstallationTarget}} {{'to_be_installed_with' | translate}}.<br>
           <strong>{{'warning' | translate}} : </strong>

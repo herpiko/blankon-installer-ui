@@ -8,4 +8,8 @@ angular.module("timezone",[])
       $rootScope.installationData.timezone = $("select").val();
       console.log($rootScope.installationData);
     });
+    // Leave this here for quick debugging
+    /* setTimeout(function(){ */
+    /*   $rootScope.next(); */
+    /* }, 1000) */
 }])
