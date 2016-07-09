@@ -73,6 +73,11 @@ var en = {
   cleaning_up : "Cleaning up",
   create_partition : "Create partition",
   format_partition : "Format Partition",
+  secure_installation_summary_1 : "You have been choosen",
+  secure_installation_summary_2 : "as installation target. The entiry disk will be wiped out and rearranged to support encryption installation.",
+  please_enter_passphrase : "Please enter the encryption passphrase bellow : ",
+  encryption_passphrase : "Encryption passphrase",
+  repeat_encryption_passphrase : "Repeat encryption passphrase"
 }
 
 var id = {

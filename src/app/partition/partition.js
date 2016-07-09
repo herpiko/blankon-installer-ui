@@ -3,6 +3,10 @@ angular.module("partition",[])
   function ($scope, $window, $timeout, $rootScope){
     
     $(".content").css("height", $rootScope.contentHeight);
+    
+    $rootScope.installationData.secureInstall = true;
+    $rootScope.installationData.secureInstallPassphrase = "";
+    $rootScope.installationData.secureInstallPassphraseRepeat = "";
    
     $scope.slider = {
     	start : 0,

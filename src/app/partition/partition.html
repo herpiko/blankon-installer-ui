@@ -9,16 +9,48 @@
       </li>
     </ul>
     <div ng-hide="advancedPartition" class="fade">
-      <p ng-show="selectedDrive" class="fade">{{'please_choose_partition' | translate}}<br>
+      <div ng-show="selectedDrive && installationData.secureInstall" class="fade" style="width:500px !important;">
+          <p>{{'secure_installation_summary_1' | translate}} {{selectedDrive.path}} {{'secure_installation_summary_2' | translate}}
+          </p>
+          <p>
+            {{'please_enter_passphrase' | translate}}
+          </p>
+          <div class="row small-8">
+            <div class="small-4 columns">
+              <label class="right inline">{{'encryption_passphrase' | translate}}</label>
+            </div>
+            <div class="small-8 columns">
+                    <input type="password" ng-model="installationData.secureInstallPassphrase" placeholder="At least 8 characters"/>
+                    <div ng-show="enforceStrongPassword">
+                    <div style="margin-top:-16px;height:4px;background-color:red;width:33%" ng-show="passwordStrength == 'weak'"></div>
+                    <div style="margin-top:-16px;height:4px;background-color:yellow;width:66%" ng-show="passwordStrength == 'strong'"></div>
+                    <div style="margin-top:-16px;height:4px;background-color:#438FB9;" ng-show="passwordStrength == 'veryStrong'"></div>
+                    </div>
+            </div>
+          </div>
+          <div class="row small-8">
+            <div class="small-4 columns">
+              <label class="right inline">{{'repeat_encryption_passphrase' | translate}}</label>
+            </div>
+            <div class="small-8 columns">
+              <input type="password" ng-model="installationData.secureInstallPassphraseRepeat" place-holder="Type the password again"/>
+                    <div style="margin-top:-16px;height:4px;background-color:#438FB9;" ng-show="isSamePassword"></div>
+                    <div style="margin-top:-16px;height:4px;background-color:red;" ng-show="!isSamePassword && installationData.secureInstallPassphraseRepeat[0]"></div>
+            </div>
+          </div>
+
+
+      </div>
+      <p ng-show="selectedDrive && !installationData.secureInstall" class="fade">{{'please_choose_partition' | translate}}<br>
       </p>
-      <div class="top-bar-partition" style="width:{{selectedDrive.driveWidth}}px" ng-show="selectedDrive" class="fade">
+      <div class="top-bar-partition" style="width:{{selectedDrive.driveWidth}}px" ng-show="selectedDrive && !installationData.secureInstall" class="fade">
         <span class="legend-partition-normal">{{'used' | translate}}</span>
         <span class="legend-partition-disallow">{{'too_small' | translate}}</span>
         <span class="legend-partition-freespace">{{'free_space' | translate}}</span>
         <a class="button tiny right" ng-click="switchToAdvancedPartition()">{{'enter_advanced_mode' | translate}}</button>
 </div>
 
-      <div class="drive-block fade" ng-show="selectedDrive" style="width:{{selectedDrive.driveWidth}}px !important;">
+      <div class="drive-block fade" ng-show="selectedDrive && !installationData.secureInstall" style="width:{{selectedDrive.driveWidth}}px !important;">
         <a href="" ng-repeat="partition in selectedDrive.partitionList" ng-hide="partition.hidden" class="partition-block" ng-click="selectInstallationTarget(partition)" ng-class="{selected:partition.selected, disallow:partition.disallow, freespace:partition.freespace, normal:partition.normal, extended:partition.extended}">
           <span class="pop fade" style="color:white">
            Size : {{partition.sizeGb}} GB<br>
