@@ -50,6 +50,11 @@ angular.module("install",[])
     if ($rootScope.advancedPartition) {
         params += "&steps=" + $rootScope.partitionSteps;
     }
+    if ($rootScope.installationData.secureInstall) {
+        params += "&secureInstall=" + $rootScope.installationData.secureInstall;
+        params += "&secureInstallPassphrase=" + $rootScope.installationData.secureInstallPassphrase;
+    }
+    
     // give time for view transition
     $timeout(function(){
       console.log(params);
